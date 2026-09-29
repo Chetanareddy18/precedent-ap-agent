@@ -67,6 +67,18 @@ that breaks "copy the last decision":
 Run it yourself: `python scripts/run_benchmark.py` replays the inbox with memory **off**, then **on**
 ([results](docs/benchmark.md)).
 
+### What's different about Precedent's memory
+
+Most memory agents store *outcomes* ("approved", "blocked") and recall "similar" events. Precedent stores the **reason and its
+conditions**, then makes the model check them:
+
+1. **Reason-level memory.** "Approve, clause 7.2, cap ₹3,000" teaches when *not* to approve.
+2. **Citable vs hint recall.** Same-vendor precedents can justify an action; other vendors' memories are hints only, and the
+   guardrail verifies the citation.
+3. **Visible condition checks** on every decision (`₹2,750 ≤ ₹3,000 cap (P1)`).
+4. **Humans teach in plain English.** Notes become memories, and ticked notes become Hindsight directives.
+5. **Corrections are memories.** Overrides are retained as `source:override`, so the same mistake isn't repeated.
+
 ---
 
 ## How Hindsight memory is used
