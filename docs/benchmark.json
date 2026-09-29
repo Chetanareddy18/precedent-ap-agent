@@ -20,14 +20,14 @@
     "total": 29,
     "straight_through": 4,
     "exceptions": 25,
-    "auto_resolved": 7,
-    "wrong_auto": 2,
-    "human_touches": 18,
-    "missed_automation": 2,
-    "auto_rate": 0.28,
+    "auto_resolved": 10,
+    "wrong_auto": 0,
+    "human_touches": 15,
+    "missed_automation": 1,
+    "auto_rate": 0.4,
     "auto_rate_last10": 0.5,
-    "accuracy": 0.84,
-    "minutes_saved": 126,
+    "accuracy": 0.96,
+    "minutes_saved": 180,
     "value_protected_inr": 1751747.4,
     "discount_captured_inr": 28173.6
   },
@@ -137,9 +137,9 @@
       "invoice_id": "INV-011",
       "date": "2026-08-07",
       "vendor": "Deccan Steel & Wire Pvt. Ltd.",
-      "grade": "missed_automation",
-      "route": "human",
-      "human_cum": 9,
+      "grade": "correct_auto",
+      "route": "auto",
+      "human_cum": 8,
       "baseline_cum": 9
     },
     {
@@ -149,7 +149,7 @@
       "vendor": "Sharma Corrugated Packaging",
       "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 9,
+      "human_cum": 8,
       "baseline_cum": 10
     },
     {
@@ -157,9 +157,9 @@
       "invoice_id": "INV-013",
       "date": "2026-08-14",
       "vendor": "Nimbus Cloud Services Inc.",
-      "grade": "missed_automation",
-      "route": "human",
-      "human_cum": 10,
+      "grade": "correct_auto",
+      "route": "auto",
+      "human_cum": 8,
       "baseline_cum": 11
     },
     {
@@ -167,9 +167,9 @@
       "invoice_id": "INV-014",
       "date": "2026-08-12",
       "vendor": "Apex Specialty Chemicals Ltd.",
-      "grade": "wrong_auto",
+      "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 11,
+      "human_cum": 8,
       "baseline_cum": 12
     },
     {
@@ -179,7 +179,7 @@
       "vendor": "Sunrise Agro Foods Pvt. Ltd.",
       "grade": "correct_escalation",
       "route": "human",
-      "human_cum": 12,
+      "human_cum": 9,
       "baseline_cum": 13
     },
     {
@@ -189,7 +189,7 @@
       "vendor": "Coastal Freight Logistics LLP",
       "grade": "straight_through",
       "route": "straight_through",
-      "human_cum": 12,
+      "human_cum": 9,
       "baseline_cum": 13
     },
     {
@@ -199,7 +199,7 @@
       "vendor": "Vertex Office Supplies",
       "grade": "correct_escalation",
       "route": "human",
-      "human_cum": 13,
+      "human_cum": 10,
       "baseline_cum": 14
     },
     {
@@ -209,7 +209,7 @@
       "vendor": "Coastal Freight Logistics LLP",
       "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 13,
+      "human_cum": 10,
       "baseline_cum": 15
     },
     {
@@ -219,7 +219,7 @@
       "vendor": "Nimbus Cloud Services Inc.",
       "grade": "correct_escalation",
       "route": "human",
-      "human_cum": 14,
+      "human_cum": 11,
       "baseline_cum": 16
     },
     {
@@ -229,7 +229,7 @@
       "vendor": "Deccan Steel & Wire Pvt. Ltd.",
       "grade": "correct_escalation",
       "route": "human",
-      "human_cum": 15,
+      "human_cum": 12,
       "baseline_cum": 17
     },
     {
@@ -239,7 +239,7 @@
       "vendor": "Hyderabad Electricals & Controls",
       "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 15,
+      "human_cum": 12,
       "baseline_cum": 18
     },
     {
@@ -247,9 +247,9 @@
       "invoice_id": "INV-022",
       "date": "2026-09-10",
       "vendor": "Metro Facility Services Pvt. Ltd.",
-      "grade": "correct_auto",
-      "route": "auto",
-      "human_cum": 15,
+      "grade": "missed_automation",
+      "route": "human",
+      "human_cum": 13,
       "baseline_cum": 19
     },
     {
@@ -259,7 +259,7 @@
       "vendor": "Sunrise Agro Foods Pvt. Ltd.",
       "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 15,
+      "human_cum": 13,
       "baseline_cum": 20
     },
     {
@@ -269,7 +269,7 @@
       "vendor": "Krishna Polymers Pvt. Ltd.",
       "grade": "correct_escalation",
       "route": "human",
-      "human_cum": 16,
+      "human_cum": 14,
       "baseline_cum": 21
     },
     {
@@ -279,7 +279,7 @@
       "vendor": "Sharma Corrugated Packaging",
       "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 16,
+      "human_cum": 14,
       "baseline_cum": 22
     },
     {
@@ -289,7 +289,7 @@
       "vendor": "Apex Specialty Chemicals Ltd.",
       "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 16,
+      "human_cum": 14,
       "baseline_cum": 23
     },
     {
@@ -297,9 +297,9 @@
       "invoice_id": "INV-027",
       "date": "2026-09-24",
       "vendor": "Deccan Steel & Wire Pvt. Ltd.",
-      "grade": "wrong_auto",
+      "grade": "correct_auto",
       "route": "auto",
-      "human_cum": 17,
+      "human_cum": 14,
       "baseline_cum": 24
     },
     {
@@ -309,7 +309,7 @@
       "vendor": "Lakshmi Offset Printers",
       "grade": "straight_through",
       "route": "straight_through",
-      "human_cum": 17,
+      "human_cum": 14,
       "baseline_cum": 24
     },
     {
@@ -319,7 +319,7 @@
       "vendor": "Vertex Office Supplies",
       "grade": "correct_escalation",
       "route": "human",
-      "human_cum": 18,
+      "human_cum": 15,
       "baseline_cum": 25
     }
   ]

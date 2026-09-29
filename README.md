@@ -62,10 +62,18 @@ that breaks "copy the last decision":
 | 19 | Nimbus FX **+3.6%** | Recalls the 2% band → **escalates** instead of auto-approving |
 | 20 | Deccan freight **₹6,800** | Over the cap → **escalates**, suggests short-pay to ₹3,000 |
 | 24 | *Krishna Polymers* freight ₹1,800 | Looks like Deccan, but it's another vendor → hint only → **human**. (Krishna's PO is FOR-destination. Generalising would have overpaid.) |
-| 6, 17, 29 | Vertex bank change ×3 | Always human. By #17 the agent says *"second attempt, same pattern as 20 Jul, verify by call-back"* from a directive the AP lead created. |
+| 6, 17, 29 | Vertex bank change ×3 | Always human (hard control). From #17 on, the recalled fraud history and the directive the AP lead created on #6 appear alongside the decision. |
 
-Run it yourself: `python scripts/run_benchmark.py` replays the inbox with memory **off**, then **on**
-([results](docs/benchmark.md)).
+**Live results** (Hindsight Cloud + Groq `openai/gpt-oss-120b`, same model and prompt, only recall toggled):
+
+| | memory OFF | memory ON |
+|---|---:|---:|
+| human touches (of 25 exceptions) | 25 | **15** |
+| auto-resolved correctly | 0 | **10** |
+| wrong auto-decisions | 0 | **0** |
+| accuracy (right route + right action) | 56% | **96%** |
+
+Run it yourself: `python scripts/run_benchmark.py` ([invoice-by-invoice results](docs/benchmark.md)).
 
 ### What's different about Precedent's memory
 

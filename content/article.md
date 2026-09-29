@@ -111,7 +111,15 @@ Same invoice, same model, same prompt. The only difference is whether recall is 
 
 - Always human. Bank changes are a hard control that memory can't unlock. But by the second attempt the agent attaches the history ("same pattern as 20 Jul, verified fraud by call-back"), plus a Hindsight **directive** the AP lead created by ticking *"make this a standing policy"* on her first note.
 
-Replaying twelve weeks of the inbox (11 vendors, 29 invoices, 25 exceptions) with memory off sends every exception to a human. With Hindsight on, the repeat exceptions resolve themselves, while the ones that only *look* like repeats (over the cap, over the FX band, a different vendor) still reach a person. The learning curve in the UI shows the two lines separating from week five onward.
+I replayed twelve weeks of the inbox (11 vendors, 29 invoices, 25 exceptions) with the same model and prompt, toggling only Hindsight recall:
+
+| | memory off | memory on |
+|---|---:|---:|
+| exceptions routed to a human | 25 | 15 |
+| resolved by the agent, correctly | 0 | 10 |
+| wrong auto-decisions | 0 | 0 |
+
+The ten it handled were all genuine repeats. The ones that only *looked* like repeats (over the cap, over the FX band, a different vendor) still reached a person. It missed one it could have handled, a repeat GST error, and sent it to a human. That's the right direction to be wrong in. The learning curve in the UI shows the two lines separating from week five onward.
 
 ## The LLM doesn't do arithmetic
 

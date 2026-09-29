@@ -62,6 +62,7 @@ async def main():
     print(f"reflect ({time.perf_counter() - t:.1f}s):", ans.text[:300].replace("\n", " "))
     print("stats:", await mem.stats())
     print("ALL HINDSIGHT CALLS OK")
+    await mem.aclose()
 
 
 if __name__ == "__main__":

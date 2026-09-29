@@ -196,6 +196,9 @@ class HindsightMemory:
                                      tags=list(getattr(f, "tags", None) or [])))
         return ReflectAnswer(text=resp.text or "", sources=sources)
 
+    async def aclose(self) -> None:
+        await self.client.aclose()
+
     async def stats(self) -> dict[str, Any]:
         try:
             resp = await self.client.alist_memories(bank_id=self.bank_id, limit=1)
