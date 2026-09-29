@@ -109,6 +109,7 @@ endpoint via `LLM_BASE_URL`/`LLM_MODEL`.
 
 ```bash
 pytest -q                                   # 14 offline tests, no keys needed
+python scripts/smoke_hindsight.py           # exercises every Hindsight call (bank, retain, tag recall, directive, mental model, reflect)
 python scripts/run_benchmark.py             # memory OFF vs ON on the live stack
 python scripts/run_benchmark.py --offline   # same, with the local test double + deterministic heuristic
 python scripts/generate_data.py             # regenerate the dataset
