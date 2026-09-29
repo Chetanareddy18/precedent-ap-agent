@@ -96,8 +96,10 @@ function renderChart(tl) {
       <text x="${P.l}" y="${H - 6}">${fmtDate(tl[0].date)}</text><text x="${W - P.r}" y="${H - 6}" text-anchor="end">invoice ${n}</text></g>
     <path class="l2" d="${path("baseline_cum")}"/><path class="l1" d="${path("human_cum")}"/>
     <circle class="dot2" r="4" cx="${x(last.n)}" cy="${y(last.baseline_cum)}"/><circle class="dot1" r="4" cx="${x(last.n)}" cy="${y(last.human_cum)}"/>
-    <text class="dlabel" x="${x(last.n) + 8}" y="${y(last.baseline_cum) + 4}">${last.baseline_cum} no memory</text>
-    <text class="dlabel" x="${x(last.n) + 8}" y="${y(last.human_cum) + (last.baseline_cum - last.human_cum < 2 ? 14 : 4)}">${last.human_cum} with memory</text>
+    ${last.baseline_cum === last.human_cum
+      ? `<text class="dlabel" x="${x(last.n) + 8}" y="${y(last.human_cum) + 4}">${last.human_cum} (both)</text>`
+      : `<text class="dlabel" x="${x(last.n) + 8}" y="${Math.min(y(last.baseline_cum) + 4, y(last.human_cum) - 10)}">${last.baseline_cum} no memory</text>
+         <text class="dlabel" x="${x(last.n) + 8}" y="${Math.max(y(last.human_cum) + 4, y(last.baseline_cum) + 18)}">${last.human_cum} with memory</text>`}
     <line class="xhair" id="xhair" y1="${P.t}" y2="${H - P.b}" x1="-10" x2="-10"/>
     <rect id="hit" x="${P.l}" y="0" width="${W - P.l - P.r}" height="${H}" fill="transparent"/></svg><div class="tip" id="tip" hidden></div>`;
   const hit = $("#hit", el), tip = $("#tip", el), xh = $("#xhair", el);
@@ -113,9 +115,22 @@ function renderChart(tl) {
   hit.addEventListener("mouseleave", () => { tip.hidden = true; xh.setAttribute("x1", -10); xh.setAttribute("x2", -10); });
 }
 
+// Long memory text -> one short, readable line (full text stays one click away).
+const clip = (s, n = 150) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s);
+function memorySummary(text) {
+  const outcome = (text.match(/Outcome:\s*([A-Z_]+)/) || [])[1];
+  const reason = (text.match(/Reason:\s*([\s\S]*)$/) || [])[1];
+  const head = reason ? reason.trim() : text.split(" | ")[0].trim();
+  return { outcome: outcome ? outcome.toLowerCase() : null, head: clip(head) };
+}
+const outcomeChip = (o) => (o ? `<span class="chip-out o-${esc(o)}">${esc(ACTION_LABEL[o] || o)}</span>` : "");
+
 function renderFeed(feed) {
-  $("#feed").innerHTML = feed.length ? feed.map((f) => `<li class="${f.policy ? "policy" : ""}"><span class="who">${esc(f.invoice_id)} · ${esc(f.vendor)}${f.policy ? " · + standing directive" : ""}</span>${esc(f.text)}</li>`).join("")
-    : `<li class="muted">Nothing yet. Resolve an exception and it lands here.</li>`;
+  $("#feed").innerHTML = feed.length ? feed.map((f) => {
+    const m = memorySummary(f.text);
+    return `<li class="${f.policy ? "policy" : ""}"><details><summary><span class="who">${esc(f.vendor)}</span>${outcomeChip(m.outcome)}${f.policy ? `<span class="chip-out o-policy">+ policy</span>` : ""}
+      <span class="snip">${esc(m.head)}</span></summary><div class="full">${esc(f.text)}</div></details></li>`;
+  }).join("") : `<li class="muted">Nothing yet. Resolve an exception and it lands here.</li>`;
 }
 
 function daysBefore(occurred, invDate) {
@@ -152,9 +167,12 @@ function renderDetail(v, isPending) {
   const vendorPrec = d.precedents.filter((p) => p.scope === "vendor"), hints = d.precedents.filter((p) => p.scope !== "vendor");
   const precCard = (p) => {
     const used = d.precedents_used.includes(p.id);
-    return `<div class="prec ${used ? "used" : ""}"><div class="meta">${used ? `<span class="used-tag">✓ cited</span>` : ""}<span>${p.occurred ? fmtDate(p.occurred.slice(0, 10)) : ""}</span>
-      <span>${daysBefore(p.occurred, inv.received_on)}</span>${p.type ? `<span>${esc(p.type)}</span>` : ""}${p.tags.filter((t) => t.startsWith("outcome:")).map((t) => `<span>${esc(t)}</span>`).join("")}</div>
-      <div class="text">${esc(p.text)}</div></div>`;
+    const out = (p.tags.find((t) => t.startsWith("outcome:")) || "").slice(8) || memorySummary(p.text).outcome;
+    const long = p.text.length > 160;
+    return `<div class="prec ${used ? "used" : ""}"><div class="meta">${used ? `<span class="used-tag">✓ cited</span>` : ""}${outcomeChip(out)}
+      <span>${p.occurred ? fmtDate(p.occurred.slice(0, 10)) : ""}</span><span>${daysBefore(p.occurred, inv.received_on)}</span></div>
+      <div class="text">${esc(memorySummary(p.text).head)}</div>
+      ${long ? `<details class="more"><summary>Full memory</summary><div class="full">${esc(p.text)}</div></details>` : ""}</div>`;
   };
   const memorySection = route === "straight_through" ? "" : `
     <div class="card"><div class="card-head"><h3>Recalled from Hindsight</h3><span class="badge soft">recall · tag vendor:${esc(vendor.vendor_id)}</span></div>
@@ -177,7 +195,8 @@ function renderDetail(v, isPending) {
 
   const resolveCard = pendingHere && route !== "straight_through" ? resolveForm(v) : v.retained ? `
     <div class="card"><div class="card-head"><h3>Outcome</h3><span class="badge soft">${esc(ACTION_LABEL[v.final_action] || v.final_action)} · ${inr(v.final_payable)}</span></div>
-      <div class="retained"><b>Retained to Hindsight →</b>\n${esc(v.retained)}</div></div>` : "";
+      <div class="retained"><b>✓ Retained to Hindsight</b> <span>${esc(memorySummary(v.retained).head)}</span>
+      <details class="more"><summary>What was stored</summary><div class="full">${esc(v.retained)}</div></details></div></div>` : "";
 
   box.innerHTML = `
     <div class="card">
@@ -189,7 +208,8 @@ function renderDetail(v, isPending) {
         <div><dt>PO</dt><dd>${esc(inv.po_number || "—")}</dd></div><div><dt>Terms</dt><dd>${esc(inv.payment_terms)}</dd></div>
         <div><dt>Remit to</dt><dd style="${bankChanged ? "color:var(--crit);font-weight:700" : ""}">${esc(inv.bank_account.bank)} ••${esc(inv.bank_account.account.slice(-4))}</dd></div>
         <div><dt>GSTIN</dt><dd>${esc(vendor.gstin || "foreign")}</dd></div></dl>
-      <div class="table-wrap"><table><thead><tr><th>Line</th><th class="num">Billed</th><th class="num">PO</th><th class="num">GRN</th><th class="num">Price</th><th class="num">PO price</th><th class="num">Value</th></tr></thead><tbody>${lines}</tbody></table></div>
+      <details class="lines"><summary>Line items · invoice vs PO vs GRN (${inv.lines.length + inv.charges.length})</summary>
+      <div class="table-wrap"><table><thead><tr><th>Line</th><th class="num">Billed</th><th class="num">PO</th><th class="num">GRN</th><th class="num">Price</th><th class="num">PO price</th><th class="num">Value</th></tr></thead><tbody>${lines}</tbody></table></div></details>
     </div>
     <div class="card"><div class="card-head"><h3>3-way match exceptions</h3><span class="badge soft">${d.exceptions.length}</span></div><div class="exceptions">${excs}</div></div>
     ${decisionCard}${memorySection}${resolveCard}`;

@@ -9,10 +9,14 @@
 <body>
 <header class="topbar">
   <div class="brand">
-    <div class="logo" aria-hidden="true">P</div>
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+      <rect width="40" height="40" rx="10" fill="var(--ink)"/>
+      <path d="M12 30V10h9a6.5 6.5 0 0 1 0 13h-9" fill="none" stroke="var(--surface)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M19 27.5l3.2 3.2 6.8-7.4" fill="none" stroke="#1baf7a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
     <div>
       <h1>Precedent</h1>
-      <p class="tag">Invoice exceptions, resolved the way your AP team resolved them last time.</p>
+      <p class="tag">Resolved the way your team did last time.</p>
     </div>
   </div>
   <div class="controls">
@@ -39,15 +43,19 @@
   <!-- ============ WORKBENCH ============ -->
   <section class="pane work" id="work">
     <div class="empty" id="emptyState">
-      <h2>12 weeks of vendor invoices. One AP lead. No memory — yet.</h2>
-      <p>Every exception the match engine finds starts out on a human's desk. Each time the AP lead resolves one,
-        Precedent <b>retains</b> the outcome and the reasoning in Hindsight. The next time that vendor does the same
-        thing, the agent <b>recalls</b> it, checks the conditions, and resolves it alone — citing the precedent.</p>
-      <ol class="steps">
-        <li><b>Next invoice</b> to walk through it yourself, or</li>
-        <li><b>▶ Autopilot</b> to replay the AP lead's real decisions and watch the human-touch curve bend.</li>
-        <li>On any exception, hit <b>Compare without memory</b> to see what a stateless agent would have said.</li>
-      </ol>
+      <p class="eyebrow">12 weeks · 11 vendors · 29 invoices</p>
+      <h2>Most invoice exceptions are reruns.<br>Precedent remembers how you solved them.</h2>
+      <div class="flow">
+        <div class="flow-step"><span class="flow-ic">👤</span><b>You decide once</b><span>and say why</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><span class="flow-ic">🧠</span><b>Hindsight remembers</b><span>the reason &amp; its limits</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><span class="flow-ic">✓</span><b>Agent resolves it</b><span>next time, with proof</span></div>
+      </div>
+      <div class="row start-row">
+        <button class="btn primary" onclick="document.getElementById('nextBtn').click()">Start with the first invoice</button>
+        <span class="muted">or press <b>▶ Autopilot</b> to replay 12 weeks</span>
+      </div>
     </div>
     <div id="detail" hidden></div>
   </section>
