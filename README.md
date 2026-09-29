@@ -175,7 +175,7 @@ web/            single-page workbench (vanilla JS, no build step)
 data/           vendors, POs, GRNs, invoices, AP lead's recorded decisions
 scripts/        generate_data.py, run_benchmark.py
 tests/          offline test-suite
-docs/           Hindsight write-up, benchmark, content (article, LinkedIn, video script)
+docs/           Hindsight write-up, benchmark results, screenshots
 ```
 
 ## Why this is a business, not a demo
