@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Precedent — AP exception agent</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">P</div>
+    <div>
+      <h1>Precedent</h1>
+      <p class="tag">Invoice exceptions, resolved the way your AP team resolved them last time.</p>
+    </div>
+  </div>
+  <div class="controls">
+    <span class="pill" id="backendPill">memory: …</span>
+    <span class="pill" id="llmPill">llm: …</span>
+    <label class="switch" title="Toggle Hindsight memory for the next run (resets the inbox)">
+      <input type="checkbox" id="memToggle" checked>
+      <span class="slider"></span><span class="switch-label">Hindsight memory</span>
+    </label>
+    <button class="btn ghost" id="resetBtn" title="Wipe the memory bank and restart the 12-week inbox">Reset</button>
+    <button class="btn" id="nextBtn">Next invoice</button>
+    <button class="btn primary" id="autoBtn" title="Replay the AP lead's recorded decisions">▶ Autopilot</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- ============ INBOX ============ -->
+  <aside class="pane inbox">
+    <div class="pane-head"><h2>AP inbox</h2><span class="muted" id="inboxCount"></span></div>
+    <p class="hint">Godavari Consumer Products · Hyderabad · Jul–Sep 2026</p>
+    <ol id="queue" class="queue"></ol>
+  </aside>
+
+  <!-- ============ WORKBENCH ============ -->
+  <section class="pane work" id="work">
+    <div class="empty" id="emptyState">
+      <h2>12 weeks of vendor invoices. One AP lead. No memory — yet.</h2>
+      <p>Every exception the match engine finds starts out on a human's desk. Each time the AP lead resolves one,
+        Precedent <b>retains</b> the outcome and the reasoning in Hindsight. The next time that vendor does the same
+        thing, the agent <b>recalls</b> it, checks the conditions, and resolves it alone — citing the precedent.</p>
+      <ol class="steps">
+        <li><b>Next invoice</b> to walk through it yourself, or</li>
+        <li><b>▶ Autopilot</b> to replay the AP lead's real decisions and watch the human-touch curve bend.</li>
+        <li>On any exception, hit <b>Compare without memory</b> to see what a stateless agent would have said.</li>
+      </ol>
+    </div>
+    <div id="detail" hidden></div>
+  </section>
+
+  <!-- ============ MEMORY / KPIs ============ -->
+  <aside class="pane side">
+    <div class="kpis" id="kpis"></div>
+
+    <div class="card">
+      <div class="card-head"><h3>Human touches per exception</h3></div>
+      <div id="chart" class="chart" role="img" aria-label="Cumulative human touches with and without memory"></div>
+      <div class="legend">
+        <span><i class="sw s1"></i>With Hindsight memory</span>
+        <span><i class="sw s2"></i>Without memory (every exception)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Ask your AP memory</h3><span class="badge soft">reflect</span></div>
+      <form id="askForm" class="ask">
+        <input id="askInput" placeholder="e.g. Which vendors keep sending the same exceptions?" autocomplete="off">
+        <button class="btn small" type="submit">Ask</button>
+      </form>
+      <div class="chips" id="askChips">
+        <button type="button" data-q="Which vendors have recurring invoice exceptions, and what is our standing resolution for each?">Recurring exceptions</button>
+        <button type="button" data-q="What caps, tolerances and effective dates govern auto-approval for each vendor?">Caps &amp; tolerances</button>
+        <button type="button" data-q="Summarise every attempted bank-detail fraud and how it was caught.">Fraud attempts</button>
+      </div>
+      <div id="askOut" class="ask-out" hidden></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Vendor playbook</h3><span class="badge soft">mental model</span></div>
+      <select id="vendorSel"></select>
+      <div id="playbook" class="playbook muted">Pick a vendor to read the playbook Hindsight has synthesised from past resolutions.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Retained to Hindsight</h3><span class="badge soft">retain</span></div>
+      <ul id="feed" class="feed"><li class="muted">Nothing yet.</li></ul>
+    </div>
+  </aside>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

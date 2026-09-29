@@ -1,0 +1,19 @@
+# Self-hosted Hindsight, using Groq for memory extraction.
+#   GROQ_API_KEY=gsk_... docker compose up -d
+# API: http://localhost:8888   Hindsight UI: http://localhost:9999
+services:
+  hindsight:
+    image: ghcr.io/vectorize-io/hindsight:latest
+    container_name: hindsight
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "9999:9999"
+    environment:
+      HINDSIGHT_API_LLM_PROVIDER: groq
+      HINDSIGHT_API_LLM_API_KEY: ${GROQ_API_KEY}
+      HINDSIGHT_API_LLM_MODEL: openai/gpt-oss-120b
+    volumes:
+      - hindsight-data:/home/hindsight/.pg0
+volumes:
+  hindsight-data:

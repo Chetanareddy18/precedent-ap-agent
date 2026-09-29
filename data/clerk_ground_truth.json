@@ -1,0 +1,292 @@
+[
+  {
+    "invoice_id": "INV-001",
+    "expected_route": "human",
+    "clerk_action": "approve",
+    "payable_amount": 250632.0,
+    "note": "Deccan's rate contract (clause 7.2) lets them bill freight separately, capped at ₹3,000 per delivery. ₹2,400 is inside the cap — approve. Anything above ₹3,000 needs procurement sign-off.",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-002",
+    "expected_route": "straight_through",
+    "clerk_action": "approve",
+    "payable_amount": 43660.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-003",
+    "expected_route": "human",
+    "clerk_action": "approve",
+    "payable_amount": 24192.0,
+    "note": "Sharma's billing system can only invoice in bundles (BDL) of 12. 100 BDL = 1,200 NOS and the value matches the PO exactly — approve. Not a quantity problem.",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-004",
+    "expected_route": "human",
+    "clerk_action": "approve",
+    "payable_amount": 353640.0,
+    "note": "Nimbus bills in USD. Treasury's rule: FX movement vs the PO budget rate of up to 2% is absorbed — approve. Above 2%, hold and ask treasury to confirm the rate before release.",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-005",
+    "expected_route": "straight_through",
+    "clerk_action": "approve",
+    "payable_amount": 129360.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-006",
+    "expected_route": "human",
+    "clerk_action": "hold",
+    "payable_amount": 0.0,
+    "note": "Bank change request came from vertex.accounts.billing@gmail.com, not their domain. Called Vertex on the number in the vendor master — they have NOT changed banks. Attempted business-email-compromise fraud. Policy: never pay to changed bank details until verified by a call-back to the vendor-master phone number and signed off by the finance controller.",
+    "make_policy": true,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-007",
+    "expected_route": "human",
+    "clerk_action": "approve_adjusted",
+    "payable_amount": 251340.0,
+    "note": "Apex sent a revised rate card (+6% on SLES) that is effective only for invoices dated on or after 1 Aug 2026. This invoice is dated 20 Jul, so short-pay to the PO price of ₹142/kg and ask Apex for a credit note for the difference. From 1 Aug onwards ₹150.52/kg is the agreed price.",
+    "make_policy": false,
+    "basis": "at_po_price",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-008",
+    "expected_route": "human",
+    "clerk_action": "reject",
+    "payable_amount": 0.0,
+    "note": "Duplicate. Coastal re-sends unpaid invoices with an '-R' suffix when the original isn't due yet. CFL/INV-4471 is already scheduled for payment — reject the resubmission, pay the original only.",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-009",
+    "expected_route": "human",
+    "clerk_action": "approve_adjusted",
+    "payable_amount": 249452.0,
+    "note": "HEC always invoices the full PO even when they dispatch in parts. Pay only what the GRN shows received (8 of 12 MCCBs). The balance gets paid when the next GRN is posted.",
+    "make_policy": false,
+    "basis": "received_qty_only",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-010",
+    "expected_route": "human",
+    "clerk_action": "reject",
+    "payable_amount": 0.0,
+    "note": "Metro charged IGST on an intra-state Telangana service. We can't claim input tax credit on that. Reject and ask for a corrected tax invoice with CGST+SGST — this started after their billing software migration in June.",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-011",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 189095.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-012",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 36288.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-013",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 367575.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-014",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 213136.32,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-015",
+    "expected_route": "human",
+    "clerk_action": "schedule_early_payment",
+    "payable_amount": 707952.0,
+    "note": "Sunrise gives 2% off for payment within 10 days. Always take it — on our monthly palm olein volume that's ~₹14,000 a month. Schedule in the next payment run.",
+    "make_policy": false,
+    "basis": "early_payment_discount",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-016",
+    "expected_route": "straight_through",
+    "clerk_action": "approve",
+    "payable_amount": 86240.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-017",
+    "expected_route": "human",
+    "clerk_action": "hold",
+    "payable_amount": 0.0,
+    "note": "Second bank-change attempt on Vertex, different account this time. Verified by call-back: fraud again. Reported to IT security.",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-018",
+    "expected_route": "auto",
+    "clerk_action": "reject",
+    "payable_amount": 0.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-019",
+    "expected_route": "human",
+    "clerk_action": "hold",
+    "payable_amount": 0.0,
+    "note": "FX is 3.6% over the budget rate — above treasury's 2% band. Holding; treasury to confirm the rate / hedge before release.",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-020",
+    "expected_route": "human",
+    "clerk_action": "approve_adjusted",
+    "payable_amount": 313290.0,
+    "note": "Freight ₹6,800 is over the ₹3,000 clause 7.2 cap. Paid goods + ₹3,000 freight; the extra ₹3,800 is on hold until procurement signs off on the second trip.",
+    "make_policy": false,
+    "basis": "cap_charges",
+    "charge_cap": 3000
+  },
+  {
+    "invoice_id": "INV-021",
+    "expected_route": "auto",
+    "clerk_action": "approve_adjusted",
+    "payable_amount": 104784.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "received_qty_only",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-022",
+    "expected_route": "auto",
+    "clerk_action": "reject",
+    "payable_amount": 0.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-023",
+    "expected_route": "auto",
+    "clerk_action": "schedule_early_payment",
+    "payable_amount": 672554.4,
+    "note": "",
+    "make_policy": false,
+    "basis": "early_payment_discount",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-024",
+    "expected_route": "human",
+    "clerk_action": "approve_adjusted",
+    "payable_amount": 75520.0,
+    "note": "New vendor. Krishna's PO is FOR-destination — freight is included in the unit price. Don't apply Deccan's freight clause here; strike the freight line and pay goods only.",
+    "make_policy": false,
+    "basis": "without_charges",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-025",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 48384.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-026",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 177613.6,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-027",
+    "expected_route": "auto",
+    "clerk_action": "approve",
+    "payable_amount": 251222.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-028",
+    "expected_route": "straight_through",
+    "clerk_action": "approve",
+    "payable_amount": 54575.0,
+    "note": "",
+    "make_policy": false,
+    "basis": "full",
+    "charge_cap": null
+  },
+  {
+    "invoice_id": "INV-029",
+    "expected_route": "human",
+    "clerk_action": "hold",
+    "payable_amount": 0.0,
+    "note": "Third attempt. Verified fraud via call-back; vendor informed.",
+    "make_policy": false,
+    "basis": "zero",
+    "charge_cap": null
+  }
+]

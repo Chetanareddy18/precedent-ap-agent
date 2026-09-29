@@ -1,0 +1,167 @@
+[
+  {
+    "vendor_id": "V001",
+    "name": "Deccan Steel & Wire Pvt. Ltd.",
+    "gstin": "36AABCD4821K1Z3",
+    "state_code": "36",
+    "city": "Medchal, Telangana",
+    "category": "Raw material — steel",
+    "payment_terms": "Net 45",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "HDFC Bank",
+      "ifsc": "HDFC0001234",
+      "account": "50200012348871"
+    }
+  },
+  {
+    "vendor_id": "V002",
+    "name": "Sharma Corrugated Packaging",
+    "gstin": "36AAKFS7719M1ZQ",
+    "state_code": "36",
+    "city": "Jeedimetla, Hyderabad",
+    "category": "Packaging",
+    "payment_terms": "Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "State Bank of India",
+      "ifsc": "SBIN0020417",
+      "account": "38915520064"
+    }
+  },
+  {
+    "vendor_id": "V003",
+    "name": "Nimbus Cloud Services Inc.",
+    "gstin": null,
+    "state_code": null,
+    "city": "Seattle, USA",
+    "category": "IT — cloud infrastructure",
+    "payment_terms": "Net 30",
+    "currency": "USD",
+    "bank_account": {
+      "bank": "JPMorgan Chase",
+      "ifsc": "CHASUS33",
+      "account": "000483920117"
+    }
+  },
+  {
+    "vendor_id": "V004",
+    "name": "Coastal Freight Logistics LLP",
+    "gstin": "37AAPFC3310H1ZK",
+    "state_code": "37",
+    "city": "Visakhapatnam, Andhra Pradesh",
+    "category": "Logistics",
+    "payment_terms": "Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "ICICI Bank",
+      "ifsc": "ICIC0000456",
+      "account": "045605003321"
+    }
+  },
+  {
+    "vendor_id": "V005",
+    "name": "Vertex Office Supplies",
+    "gstin": "36AATPV6624R1Z9",
+    "state_code": "36",
+    "city": "Ameerpet, Hyderabad",
+    "category": "Office consumables",
+    "payment_terms": "Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "Kotak Mahindra Bank",
+      "ifsc": "KKBK0007452",
+      "account": "7412098833"
+    }
+  },
+  {
+    "vendor_id": "V006",
+    "name": "Apex Specialty Chemicals Ltd.",
+    "gstin": "36AAECA9087P1ZM",
+    "state_code": "36",
+    "city": "Patancheru, Telangana",
+    "category": "Raw material — surfactants",
+    "payment_terms": "Net 60",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "Axis Bank",
+      "ifsc": "UTIB0000553",
+      "account": "917020045566120"
+    }
+  },
+  {
+    "vendor_id": "V007",
+    "name": "Sunrise Agro Foods Pvt. Ltd.",
+    "gstin": "36AAKCS2231F1Z7",
+    "state_code": "36",
+    "city": "Nizamabad, Telangana",
+    "category": "Raw material — edible oils",
+    "payment_terms": "2/10 Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "Canara Bank",
+      "ifsc": "CNRB0003321",
+      "account": "3321201004478"
+    }
+  },
+  {
+    "vendor_id": "V008",
+    "name": "Hyderabad Electricals & Controls",
+    "gstin": "36AAHFH5510D1ZW",
+    "state_code": "36",
+    "city": "Balanagar, Hyderabad",
+    "category": "MRO — electrical",
+    "payment_terms": "Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "Union Bank of India",
+      "ifsc": "UBIN0815772",
+      "account": "157711100009921"
+    }
+  },
+  {
+    "vendor_id": "V009",
+    "name": "Metro Facility Services Pvt. Ltd.",
+    "gstin": "36AAFCM8842L1ZU",
+    "state_code": "36",
+    "city": "Gachibowli, Hyderabad",
+    "category": "Facility services",
+    "payment_terms": "Net 15",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "IndusInd Bank",
+      "ifsc": "INDB0000712",
+      "account": "201004588213"
+    }
+  },
+  {
+    "vendor_id": "V010",
+    "name": "Lakshmi Offset Printers",
+    "gstin": "36AAJFL3321C1Z5",
+    "state_code": "36",
+    "city": "Chikkadpally, Hyderabad",
+    "category": "Printing — labels & cartons",
+    "payment_terms": "Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "Bank of Baroda",
+      "ifsc": "BARB0CHIKKA",
+      "account": "29870200001457"
+    }
+  },
+  {
+    "vendor_id": "V011",
+    "name": "Krishna Polymers Pvt. Ltd.",
+    "gstin": "36AAGCK1187N1Z2",
+    "state_code": "36",
+    "city": "Kukatpally, Hyderabad",
+    "category": "Packaging — HDPE bottles",
+    "payment_terms": "Net 30",
+    "currency": "INR",
+    "bank_account": {
+      "bank": "HDFC Bank",
+      "ifsc": "HDFC0002290",
+      "account": "50200077120034"
+    }
+  }
+]

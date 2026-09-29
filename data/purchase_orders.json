@@ -1,0 +1,506 @@
+[
+  {
+    "po_number": "PO-45012",
+    "vendor_id": "V001",
+    "date": "2026-06-24",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "WR55",
+        "description": "MS Wire Rod 5.5mm (IS 7887)",
+        "hsn": "7213",
+        "qty": 4.0,
+        "uom": "MT",
+        "unit_price": 52500.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45019",
+    "vendor_id": "V010",
+    "date": "2026-06-28",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "LBL",
+        "description": "Printed front labels, 4-colour",
+        "hsn": "4821",
+        "qty": 20000.0,
+        "uom": "NOS",
+        "unit_price": 1.85,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45021",
+    "vendor_id": "V002",
+    "date": "2026-06-30",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "CB3P",
+        "description": "3-ply corrugated shipper box 450x300x250",
+        "hsn": "4819",
+        "qty": 1200.0,
+        "uom": "NOS",
+        "unit_price": 18.0,
+        "tax_rate": 0.12
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45027",
+    "vendor_id": "V003",
+    "date": "2026-07-01",
+    "currency": "USD",
+    "budget_fx_rate": 83.0,
+    "lines": [
+      {
+        "sku": "K8S",
+        "description": "Managed Kubernetes cluster — monthly",
+        "hsn": "998315",
+        "qty": 1.0,
+        "uom": "MONTH",
+        "unit_price": 4200.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45030",
+    "vendor_id": "V004",
+    "date": "2026-07-02",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "RFHV",
+        "description": "Road freight HYD–VSKP, 32ft MXL",
+        "hsn": "996511",
+        "qty": 3.0,
+        "uom": "TRIP",
+        "unit_price": 38500.0,
+        "tax_rate": 0.12
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45033",
+    "vendor_id": "V005",
+    "date": "2026-07-08",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "A4P",
+        "description": "A4 copier paper 75gsm (ream)",
+        "hsn": "4802",
+        "qty": 200.0,
+        "uom": "REAM",
+        "unit_price": 265.0,
+        "tax_rate": 0.18
+      },
+      {
+        "sku": "TNR",
+        "description": "Toner cartridge HP 88A",
+        "hsn": "8443",
+        "qty": 10.0,
+        "uom": "NOS",
+        "unit_price": 3950.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45036",
+    "vendor_id": "V006",
+    "date": "2026-07-10",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "SLES",
+        "description": "Sodium Lauryl Ether Sulphate 70%",
+        "hsn": "3402",
+        "qty": 1500.0,
+        "uom": "KG",
+        "unit_price": 142.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45040",
+    "vendor_id": "V008",
+    "date": "2026-07-14",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "MCCB",
+        "description": "MCCB 3P 250A 36kA",
+        "hsn": "8536",
+        "qty": 12.0,
+        "uom": "NOS",
+        "unit_price": 14800.0,
+        "tax_rate": 0.18
+      },
+      {
+        "sku": "CT95",
+        "description": "Power contactor 95A AC3",
+        "hsn": "8536",
+        "qty": 20.0,
+        "uom": "NOS",
+        "unit_price": 4650.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45044",
+    "vendor_id": "V009",
+    "date": "2026-07-01",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "HKM",
+        "description": "Housekeeping manpower — monthly (14 staff)",
+        "hsn": "998533",
+        "qty": 1.0,
+        "uom": "MONTH",
+        "unit_price": 336000.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45048",
+    "vendor_id": "V001",
+    "date": "2026-07-28",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "WR55",
+        "description": "MS Wire Rod 5.5mm (IS 7887)",
+        "hsn": "7213",
+        "qty": 3.0,
+        "uom": "MT",
+        "unit_price": 52500.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45051",
+    "vendor_id": "V002",
+    "date": "2026-08-01",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "CB3P",
+        "description": "3-ply corrugated shipper box 450x300x250",
+        "hsn": "4819",
+        "qty": 1800.0,
+        "uom": "NOS",
+        "unit_price": 18.0,
+        "tax_rate": 0.12
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45055",
+    "vendor_id": "V003",
+    "date": "2026-08-01",
+    "currency": "USD",
+    "budget_fx_rate": 83.0,
+    "lines": [
+      {
+        "sku": "K8S",
+        "description": "Managed Kubernetes cluster — monthly",
+        "hsn": "998315",
+        "qty": 1.0,
+        "uom": "MONTH",
+        "unit_price": 4350.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45058",
+    "vendor_id": "V006",
+    "date": "2026-08-04",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "SLES",
+        "description": "Sodium Lauryl Ether Sulphate 70%",
+        "hsn": "3402",
+        "qty": 1200.0,
+        "uom": "KG",
+        "unit_price": 142.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45061",
+    "vendor_id": "V007",
+    "date": "2026-08-10",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "RPO",
+        "description": "Refined palm olein, 15kg tin",
+        "hsn": "1511",
+        "qty": 400.0,
+        "uom": "TIN",
+        "unit_price": 1720.0,
+        "tax_rate": 0.05
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45063",
+    "vendor_id": "V004",
+    "date": "2026-08-12",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "RFHV",
+        "description": "Road freight HYD–VSKP, 32ft MXL",
+        "hsn": "996511",
+        "qty": 2.0,
+        "uom": "TRIP",
+        "unit_price": 38500.0,
+        "tax_rate": 0.12
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45064",
+    "vendor_id": "V005",
+    "date": "2026-08-14",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "A4P",
+        "description": "A4 copier paper 75gsm (ream)",
+        "hsn": "4802",
+        "qty": 150.0,
+        "uom": "REAM",
+        "unit_price": 265.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45068",
+    "vendor_id": "V003",
+    "date": "2026-08-20",
+    "currency": "USD",
+    "budget_fx_rate": 83.0,
+    "lines": [
+      {
+        "sku": "K8S",
+        "description": "Managed Kubernetes cluster — monthly",
+        "hsn": "998315",
+        "qty": 1.0,
+        "uom": "MONTH",
+        "unit_price": 4300.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45070",
+    "vendor_id": "V001",
+    "date": "2026-08-24",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "WR55",
+        "description": "MS Wire Rod 5.5mm (IS 7887)",
+        "hsn": "7213",
+        "qty": 5.0,
+        "uom": "MT",
+        "unit_price": 52500.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45073",
+    "vendor_id": "V008",
+    "date": "2026-08-26",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "MCCB",
+        "description": "MCCB 3P 250A 36kA",
+        "hsn": "8536",
+        "qty": 10.0,
+        "uom": "NOS",
+        "unit_price": 14800.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45075",
+    "vendor_id": "V009",
+    "date": "2026-08-01",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "HKM",
+        "description": "Housekeeping manpower — monthly (14 staff)",
+        "hsn": "998533",
+        "qty": 1.0,
+        "uom": "MONTH",
+        "unit_price": 336000.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45078",
+    "vendor_id": "V007",
+    "date": "2026-09-02",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "RPO",
+        "description": "Refined palm olein, 15kg tin",
+        "hsn": "1511",
+        "qty": 380.0,
+        "uom": "TIN",
+        "unit_price": 1720.0,
+        "tax_rate": 0.05
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45080",
+    "vendor_id": "V011",
+    "date": "2026-09-03",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "HDB5",
+        "description": "HDPE bottle 500ml with cap",
+        "hsn": "3923",
+        "qty": 10000.0,
+        "uom": "NOS",
+        "unit_price": 6.4,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45082",
+    "vendor_id": "V002",
+    "date": "2026-09-08",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "CB3P",
+        "description": "3-ply corrugated shipper box 450x300x250",
+        "hsn": "4819",
+        "qty": 2400.0,
+        "uom": "NOS",
+        "unit_price": 18.0,
+        "tax_rate": 0.12
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45084",
+    "vendor_id": "V006",
+    "date": "2026-09-10",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "SLES",
+        "description": "Sodium Lauryl Ether Sulphate 70%",
+        "hsn": "3402",
+        "qty": 1000.0,
+        "uom": "KG",
+        "unit_price": 142.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45087",
+    "vendor_id": "V001",
+    "date": "2026-09-14",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "WR55",
+        "description": "MS Wire Rod 5.5mm (IS 7887)",
+        "hsn": "7213",
+        "qty": 4.0,
+        "uom": "MT",
+        "unit_price": 52500.0,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45089",
+    "vendor_id": "V010",
+    "date": "2026-09-16",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "LBL",
+        "description": "Printed front labels, 4-colour",
+        "hsn": "4821",
+        "qty": 25000.0,
+        "uom": "NOS",
+        "unit_price": 1.85,
+        "tax_rate": 0.18
+      }
+    ]
+  },
+  {
+    "po_number": "PO-45090",
+    "vendor_id": "V005",
+    "date": "2026-09-18",
+    "currency": "INR",
+    "budget_fx_rate": 1.0,
+    "lines": [
+      {
+        "sku": "TNR",
+        "description": "Toner cartridge HP 88A",
+        "hsn": "8443",
+        "qty": 12.0,
+        "uom": "NOS",
+        "unit_price": 3950.0,
+        "tax_rate": 0.18
+      }
+    ]
+  }
+]

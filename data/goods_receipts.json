@@ -1,0 +1,307 @@
+[
+  {
+    "grn_number": "GRN-45012",
+    "po_number": "PO-45012",
+    "date": "2026-07-01",
+    "lines": [
+      {
+        "sku": "WR55",
+        "qty_received": 4.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45019",
+    "po_number": "PO-45019",
+    "date": "2026-07-04",
+    "lines": [
+      {
+        "sku": "LBL",
+        "qty_received": 20000.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45021",
+    "po_number": "PO-45021",
+    "date": "2026-07-06",
+    "lines": [
+      {
+        "sku": "CB3P",
+        "qty_received": 1200.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45027",
+    "po_number": "PO-45027",
+    "date": "2026-07-10",
+    "lines": [
+      {
+        "sku": "K8S",
+        "qty_received": 1.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45030",
+    "po_number": "PO-45030",
+    "date": "2026-07-12",
+    "lines": [
+      {
+        "sku": "RFHV",
+        "qty_received": 3.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45033",
+    "po_number": "PO-45033",
+    "date": "2026-07-16",
+    "lines": [
+      {
+        "sku": "A4P",
+        "qty_received": 200.0
+      },
+      {
+        "sku": "TNR",
+        "qty_received": 10.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45036",
+    "po_number": "PO-45036",
+    "date": "2026-07-19",
+    "lines": [
+      {
+        "sku": "SLES",
+        "qty_received": 1500.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45040",
+    "po_number": "PO-45040",
+    "date": "2026-07-27",
+    "lines": [
+      {
+        "sku": "MCCB",
+        "qty_received": 8.0
+      },
+      {
+        "sku": "CT95",
+        "qty_received": 20.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45044",
+    "po_number": "PO-45044",
+    "date": "2026-07-31",
+    "lines": [
+      {
+        "sku": "HKM",
+        "qty_received": 1.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45048",
+    "po_number": "PO-45048",
+    "date": "2026-08-03",
+    "lines": [
+      {
+        "sku": "WR55",
+        "qty_received": 3.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45051",
+    "po_number": "PO-45051",
+    "date": "2026-08-06",
+    "lines": [
+      {
+        "sku": "CB3P",
+        "qty_received": 1800.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45055",
+    "po_number": "PO-45055",
+    "date": "2026-08-10",
+    "lines": [
+      {
+        "sku": "K8S",
+        "qty_received": 1.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45058",
+    "po_number": "PO-45058",
+    "date": "2026-08-09",
+    "lines": [
+      {
+        "sku": "SLES",
+        "qty_received": 1200.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45061",
+    "po_number": "PO-45061",
+    "date": "2026-08-16",
+    "lines": [
+      {
+        "sku": "RPO",
+        "qty_received": 400.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45063",
+    "po_number": "PO-45063",
+    "date": "2026-08-18",
+    "lines": [
+      {
+        "sku": "RFHV",
+        "qty_received": 2.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45064",
+    "po_number": "PO-45064",
+    "date": "2026-08-19",
+    "lines": [
+      {
+        "sku": "A4P",
+        "qty_received": 150.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45068",
+    "po_number": "PO-45068",
+    "date": "2026-08-27",
+    "lines": [
+      {
+        "sku": "K8S",
+        "qty_received": 1.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45070",
+    "po_number": "PO-45070",
+    "date": "2026-08-30",
+    "lines": [
+      {
+        "sku": "WR55",
+        "qty_received": 5.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45073",
+    "po_number": "PO-45073",
+    "date": "2026-09-02",
+    "lines": [
+      {
+        "sku": "MCCB",
+        "qty_received": 6.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45075",
+    "po_number": "PO-45075",
+    "date": "2026-09-05",
+    "lines": [
+      {
+        "sku": "HKM",
+        "qty_received": 1.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45078",
+    "po_number": "PO-45078",
+    "date": "2026-09-08",
+    "lines": [
+      {
+        "sku": "RPO",
+        "qty_received": 380.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45080",
+    "po_number": "PO-45080",
+    "date": "2026-09-10",
+    "lines": [
+      {
+        "sku": "HDB5",
+        "qty_received": 10000.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45082",
+    "po_number": "PO-45082",
+    "date": "2026-09-13",
+    "lines": [
+      {
+        "sku": "CB3P",
+        "qty_received": 2400.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45084",
+    "po_number": "PO-45084",
+    "date": "2026-09-16",
+    "lines": [
+      {
+        "sku": "SLES",
+        "qty_received": 1000.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45087",
+    "po_number": "PO-45087",
+    "date": "2026-09-20",
+    "lines": [
+      {
+        "sku": "WR55",
+        "qty_received": 4.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45089",
+    "po_number": "PO-45089",
+    "date": "2026-09-22",
+    "lines": [
+      {
+        "sku": "LBL",
+        "qty_received": 25000.0
+      }
+    ]
+  },
+  {
+    "grn_number": "GRN-45090",
+    "po_number": "PO-45090",
+    "date": "2026-09-23",
+    "lines": [
+      {
+        "sku": "TNR",
+        "qty_received": 12.0
+      }
+    ]
+  }
+]
