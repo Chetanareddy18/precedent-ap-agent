@@ -71,13 +71,13 @@ function renderKpis(m, useMemory) {
   const pct = (x) => Math.round(x * 100) + "%";
   const hours = (m.minutes_saved / 60).toFixed(1);
   $("#kpis").innerHTML = [
-    ["Auto-resolved (last 10)", pct(m.auto_rate_last10), `${m.auto_resolved} of ${m.exceptions} exceptions overall`],
-    ["Human touches", `${m.human_touches}`, `vs ${m.exceptions} without memory`],
-    ["Clerk time saved", `${hours} h`, `${m.auto_resolved} × ${Math.round(m.minutes_saved / Math.max(1, m.auto_resolved)) || 18} min`],
-    ["Wrong auto-decisions", `${m.wrong_auto}`, "overridden by the AP lead"],
-    ["Overbilling stopped", inrShort(m.value_protected_inr), "short-pays, rejects, holds"],
-    ["Discounts captured", inrShort(m.discount_captured_inr), "early-payment terms"],
-  ].map(([l, v, s]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div><div class="s">${esc(s)}</div></div>`).join("")
+    ["Auto-resolved (last 10)", pct(m.auto_rate_last10), `${m.auto_resolved} of ${m.exceptions} exceptions overall`, "k-good"],
+    ["Human touches", `${m.human_touches}`, `vs ${m.exceptions} without memory`, "k-warn"],
+    ["Clerk time saved", `${hours} h`, `${m.auto_resolved} × ${Math.round(m.minutes_saved / Math.max(1, m.auto_resolved)) || 18} min`, "k-info"],
+    ["Wrong auto-decisions", `${m.wrong_auto}`, "overridden by the AP lead", m.wrong_auto ? "k-crit" : "k-good"],
+    ["Overbilling stopped", inrShort(m.value_protected_inr), "short-pays, rejects, holds", "k-info"],
+    ["Discounts captured", inrShort(m.discount_captured_inr), "early-payment terms", "k-good"],
+  ].map(([l, v, s, k]) => `<div class="kpi ${k}"><div class="v">${v}</div><div class="l">${l}</div><div class="s">${esc(s)}</div></div>`).join("")
     + (useMemory ? "" : `<div class="kpi" style="grid-column:1/-1;background:var(--warn-bg)"><div class="l"><b>Memory is OFF.</b> The agent can't recall anything, so every exception lands on a human.</div></div>`);
 }
 
@@ -314,6 +314,21 @@ $("#vendorSel").addEventListener("change", async (ev) => {
   catch (e) { box.textContent = e.message; }
 });
 window.addEventListener("resize", () => S && renderChart(S.timeline));
+
+// Light / dark toggle (remembered per browser; falls back to the OS setting).
+function applyTheme(t) {
+  if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+  const dark = t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  $("#themeBtn").textContent = dark ? "☀" : "🌙";
+}
+try { applyTheme(localStorage.getItem("precedent-theme")); } catch { applyTheme(null); }
+$("#themeBtn").addEventListener("click", () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const next = cur === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem("precedent-theme", next); } catch {}
+  if (S) renderChart(S.timeline);
+});
 
 (async function init() {
   const st = await api("/api/state");
