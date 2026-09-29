@@ -30,6 +30,12 @@ session = Session.load(agent)
 app = FastAPI(title="Precedent — AP exception agent with Hindsight memory")
 
 
+@app.on_event("startup")
+async def fresh_bank():
+    """Every server start is a new 12-week replay, so it gets an empty memory bank."""
+    await memory.reset()
+
+
 def _step_view(step: Step | None) -> dict[str, Any] | None:
     if step is None:
         return None
@@ -60,7 +66,7 @@ def _state() -> dict[str, Any]:
                       "route": s.decision.route.value if s else None,
                       "final_action": s.final_action if s else None})
     return {
-        "memory_backend": memory.backend, "bank_id": settings.bank_id, "llm": llm.label,
+        "memory_backend": memory.backend, "bank_id": getattr(memory, "bank_id", settings.bank_id), "llm": llm.label,
         "use_memory": session.use_memory, "queue": queue, "metrics": session.metrics(),
         "timeline": session.timeline(), "pending": _step_view(session.pending), "feed": session.feed[:12],
         "current": _step_view(session.pending or (session.steps[-1] if session.steps else None)),

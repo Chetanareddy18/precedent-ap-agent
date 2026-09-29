@@ -296,3 +296,8 @@ details.more { margin-top: 6px; }
 .flow-step:nth-of-type(2) { border-top: 3px solid var(--series-1); }
 .flow-step:nth-of-type(3) { border-top: 3px solid var(--brand); }
 .decision.auto { background: linear-gradient(90deg, var(--brand-soft), var(--surface) 45%); }
+
+.flow { flex-wrap: nowrap; }
+.flow-step { flex: 1 1 0; min-width: 0; }
+.theme-btn { width: auto; padding: 7px 12px; }
+@media (max-width: 900px) { .flow { flex-wrap: wrap; } .flow-step { flex-basis: 100%; } }

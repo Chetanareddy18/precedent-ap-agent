@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -84,6 +85,7 @@ class HindsightMemory:
     def __init__(self, base_url: str, api_key: str | None, bank_id: str):
         from hindsight_client import Hindsight
 
+        self.base_bank_id = bank_id
         self.bank_id = bank_id
         self.client = Hindsight(base_url=base_url, api_key=api_key or None, timeout=120.0)
         self._bank_ready = False
@@ -107,10 +109,13 @@ class HindsightMemory:
         self._bank_ready = True
 
     async def reset(self) -> None:
+        # Deleting a cloud bank is not instantly visible to recall, so a reset always moves to a
+        # brand-new bank id: the next invoice is guaranteed to start from an empty memory.
         try:
             await self.client.adelete_bank(self.bank_id)
         except Exception as exc:
             log.info("delete_bank: %s", str(exc)[:160])
+        self.bank_id = f"{self.base_bank_id}-{int(time.time())}"
         self._bank_ready = False
         self._playbooks.clear()
         await self.ensure_bank()

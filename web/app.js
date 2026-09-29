@@ -319,7 +319,7 @@ window.addEventListener("resize", () => S && renderChart(S.timeline));
 function applyTheme(t) {
   if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
   const dark = t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  $("#themeBtn").textContent = dark ? "☀" : "🌙";
+  $("#themeBtn").textContent = dark ? "Light" : "Dark";
 }
 try { applyTheme(localStorage.getItem("precedent-theme")); } catch { applyTheme(null); }
 $("#themeBtn").addEventListener("click", () => {
@@ -335,4 +335,6 @@ $("#themeBtn").addEventListener("click", () => {
   const vendors = [...new Map(st.queue.map((q) => [q.vendor_id, q.vendor])).entries()];
   $("#vendorSel").innerHTML = `<option value="">Select vendor…</option>` + vendors.map(([id, n]) => `<option value="${id}">${esc(n)}</option>`).join("");
   render(st);
+  const want = decodeURIComponent(location.hash.slice(1));  // deep link: /#INV-011 opens that invoice
+  if (want) { try { const v = await api("/api/steps/" + want); viewing = want; renderDetail(v, false); renderQueue(S); } catch {} }
 })();
