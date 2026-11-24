@@ -128,7 +128,7 @@ Agent LLM: `GROQ_API_KEY` with `openai/gpt-oss-120b` (fallback `qwen/qwen3-32b`)
 endpoint via `LLM_BASE_URL`/`LLM_MODEL`.
 
 ```bash
-pytest -q                                   # 14 offline tests, no keys needed
+pytest -q                                   # 16 offline tests, no keys needed
 python scripts/smoke_hindsight.py           # exercises every Hindsight call (bank, retain, tag recall, directive, mental model, reflect)
 python scripts/run_benchmark.py             # memory OFF vs ON on the live stack
 python scripts/run_benchmark.py --offline   # same, with the local test double + deterministic heuristic
@@ -146,6 +146,23 @@ python scripts/generate_data.py             # regenerate the dataset
 - **Ask your AP memory** (reflect), **Vendor playbook** (mental model), **Retained to Hindsight** (live retain feed).
 
 ---
+
+## Ops Watch: monitoring and incidents
+
+An AP agent fails quietly. If Hindsight is down, it fails safe and sends every exception to a human, so nothing
+errors, but the queue grows. If the LLM hits a rate limit, decisions drop to the heuristic. Ops Watch
+([precedent/monitor.py](precedent/monitor.py)) watches for these and opens an incident **before** they become a backlog
+or a wrong payment.
+
+- **Continuous checks:** a background loop probes memory every `OPS_INTERVAL_S` seconds, and the rules also run after every invoice.
+- **4 checks:** memory down (3 of the last 10 calls failed), LLM down (3 of the last 10 calls got no answer),
+  slow decisions (average over `LATENCY_SLO_MS`), and repeated bank-detail changes from one vendor (fraud).
+- **Each incident has** a severity (SEV1-3), the evidence, what happens if nobody acts, and the steps to fix it.
+  It closes itself when the check passes again. Fraud incidents stay open until a person resolves them.
+- **Portal:** open `/ops` to see component health and incidents, and resolve them. Set `INCIDENT_WEBHOOK_URL` to also
+  send them to Slack / ServiceNow / PagerDuty.
+- **Demo:** on `/ops`, turn on *Hindsight memory down*, process a few invoices, and an incident opens. Turn it off and it closes.
+  A memory outage never blocks a clerk's decision; it is logged as not saved instead.
 
 ## Engineering notes
 
@@ -170,6 +187,7 @@ precedent/
   agent.py      decide → guardrails → learn; payable maths; LLM prompt
   llm.py        Groq/OpenAI-compatible JSON client with repair + fallbacks
   session.py    inbox stream, clerk simulator, grading, KPIs
+  monitor.py    Ops Watch: health rules, incidents, webhook
   api.py        FastAPI endpoints + static UI
 web/            single-page workbench (vanilla JS, no build step)
 data/           vendors, POs, GRNs, invoices, AP lead's recorded decisions

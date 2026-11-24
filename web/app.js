@@ -40,6 +40,9 @@ function render(state) {
   const lp = $("#llmPill");
   lp.className = "pill " + (state.llm === "disabled" ? "warn" : "ok");
   lp.textContent = state.llm === "disabled" ? "LLM off · heuristic mode" : state.llm;
+  const op = $("#opsPill");
+  op.className = "pill " + (state.ops_open ? "warn" : "ok");
+  op.textContent = state.ops_open ? `Ops Watch · ${state.ops_open} open` : "Ops Watch · all clear";
   $("#memToggle").checked = state.use_memory;
   $("#autoBtn").textContent = autopilot ? "❚❚ Pause" : state.done ? "✓ Done" : "▶ Autopilot";
   $("#autoBtn").disabled = state.done && !autopilot;

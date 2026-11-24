@@ -4,6 +4,7 @@
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 from pathlib import Path
 from typing import Any
@@ -18,14 +19,19 @@ from .config import ROOT, settings
 from .llm import LLM
 from .memory import build_memory
 from .models import Action, ClerkResolution
+from .monitor import Monitor
 from .session import Session, Step
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
-memory = build_memory(settings.hindsight_base_url, settings.hindsight_api_key, settings.bank_id)
-llm = LLM(settings.llm_api_key, settings.llm_base_url, [settings.llm_model, settings.llm_fallback_model])
+monitor = Monitor(interval_s=settings.ops_interval_s, latency_slo_ms=settings.latency_slo_ms,
+                  webhook_url=settings.incident_webhook_url)
+memory, llm = monitor.attach(
+    build_memory(settings.hindsight_base_url, settings.hindsight_api_key, settings.bank_id),
+    LLM(settings.llm_api_key, settings.llm_base_url, [settings.llm_model, settings.llm_fallback_model]))
 agent = APAgent(settings, memory, llm)
 session = Session.load(agent)
+session.observer = monitor.observe_step
 
 app = FastAPI(title="Precedent — AP exception agent with Hindsight memory")
 
@@ -34,6 +40,7 @@ app = FastAPI(title="Precedent — AP exception agent with Hindsight memory")
 async def fresh_bank():
     """Every server start is a new 12-week replay, so it gets an empty memory bank."""
     await memory.reset()
+    app.state.monitor_task = asyncio.create_task(monitor.run_forever())
 
 
 def _step_view(step: Step | None) -> dict[str, Any] | None:
@@ -70,7 +77,7 @@ def _state() -> dict[str, Any]:
         "use_memory": session.use_memory, "queue": queue, "metrics": session.metrics(),
         "timeline": session.timeline(), "pending": _step_view(session.pending), "feed": session.feed[:12],
         "current": _step_view(session.pending or (session.steps[-1] if session.steps else None)),
-        "done": session.done,
+        "done": session.done, "ops_open": sum(i.status == "open" for i in monitor.incidents),
     }
 
 
@@ -116,6 +123,8 @@ async def reset(body: ResetBody):
             await memory.reset()
         agent.history.clear()
         session = Session.load(agent, use_memory=body.use_memory)
+        session.observer = monitor.observe_step
+        monitor.new_run()
     return _state()
 
 
@@ -183,6 +192,46 @@ async def playbook(vendor_id: str):
 @app.get("/api/directives")
 async def directives():
     return await memory.directives()
+
+
+# ------------------------------------------------------------------ Ops Watch (monitoring + incidents)
+class SimulateBody(BaseModel):
+    fault: str  # memory_down | llm_down
+    on: bool = True
+
+
+@app.get("/api/ops")
+async def ops():
+    return monitor.snapshot()
+
+
+@app.post("/api/incidents/{inc_id}/resolve")
+async def resolve_incident(inc_id: str):
+    try:
+        monitor.resolve(inc_id)
+    except KeyError:
+        raise HTTPException(404, "unknown incident")
+    return monitor.snapshot()
+
+
+@app.post("/api/ops/simulate")
+async def simulate(body: SimulateBody):
+    """Demo only: pretend a dependency is down, to watch Ops Watch detect it."""
+    if body.fault not in ("memory_down", "llm_down"):
+        raise HTTPException(422, "fault must be memory_down or llm_down")
+    (monitor.simulated.add if body.on else monitor.simulated.discard)(body.fault)
+    if body.on and body.fault == "memory_down":
+        try:
+            await memory.stats()  # probe now so the incident shows up right away
+        except Exception:
+            pass
+    await monitor.check()
+    return monitor.snapshot()
+
+
+@app.get("/ops")
+async def ops_page():
+    return FileResponse(Path(ROOT / "web") / "ops.html")
 
 
 WEB = ROOT / "web"

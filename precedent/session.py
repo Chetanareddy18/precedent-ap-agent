@@ -7,11 +7,14 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Awaitable, Callable
 
 from .agent import APAgent
 from .models import Action, ClerkResolution, Decision, Invoice, Route
+
+log = logging.getLogger("precedent.session")
 
 
 @dataclass
@@ -44,6 +47,7 @@ class Session:
     pending: Step | None = None
     lock: asyncio.Lock = field(default_factory=asyncio.Lock)
     feed: list[dict[str, Any]] = field(default_factory=list)
+    observer: Callable[[Step], Awaitable[None]] | None = None  # Ops Watch hook, called after every invoice
 
     @classmethod
     def load(cls, agent: APAgent, use_memory: bool = True) -> "Session":
@@ -123,13 +127,19 @@ class Session:
         step.final_action = (res.action.value if res else step.decision.action.value)
         step.final_payable = res.payable_amount if res else step.decision.payable_amount
         if retain and res is not None and self.use_memory:
-            step.retained = await self.agent.learn(step.invoice, step.decision, res, basis=basis or "full",
-                                                   charge_cap=charge_cap)
+            try:
+                step.retained = await self.agent.learn(step.invoice, step.decision, res, basis=basis or "full",
+                                                       charge_cap=charge_cap)
+            except Exception as exc:  # memory down: the clerk's decision still stands, Ops Watch raises it
+                log.warning("retain failed for %s: %s", step.invoice.invoice_id, exc)
+                step.retained = f"NOT SAVED to memory (memory unavailable): {exc}"
             self.feed.insert(0, {"invoice_id": step.invoice.invoice_id, "vendor": self.agent.vendors[step.invoice.vendor_id].name,
                                  "text": step.retained, "policy": bool(res.make_policy)})
         self.agent.post(step.invoice)
         self.steps.append(step)
         self.pending = None
+        if self.observer:
+            await self.observer(step)
 
     # ------------------------------------------------------------------ reporting
     def metrics(self) -> dict[str, Any]:

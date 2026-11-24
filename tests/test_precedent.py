@@ -125,3 +125,42 @@ def test_resolve_requires_pending(agent):
     with pytest.raises(ValueError):
         run(s.resolve(None))
     assert Action("approve_adjusted") == Action.APPROVE_ADJUSTED
+
+
+# ------------------------------------------------------------------ Ops Watch
+from precedent.monitor import Monitor  # noqa: E402
+
+
+def _monitored_session():
+    mon = Monitor()
+    mem, llm = mon.attach(LocalMemory(), LLM(None, "", []))
+    s = Session.load(APAgent(settings, mem, llm))
+    s.observer = mon.observe_step
+    return mon, s
+
+
+def test_full_run_raises_only_the_fraud_incident():
+    mon, s = _monitored_session()
+
+    async def go():
+        while not s.done:
+            await s.autopilot_step()
+    run(go())
+    rules = {i.rule for i in mon.incidents}
+    assert any(r.startswith("fraud:") for r in rules)  # Vertex bank-change attempts
+    assert not rules & {"memory_down", "llm_down", "slow"}
+
+
+def test_memory_outage_opens_incident_and_closes_on_recovery():
+    mon, s = _monitored_session()
+    mon.simulated.add("memory_down")
+
+    async def go(n):
+        for _ in range(n):
+            await s.autopilot_step()
+    run(go(6))  # the outage must not break invoice processing
+    inc = next(i for i in mon.incidents if i.rule == "memory_down")
+    assert inc.status == "open" and inc.severity == "SEV2"
+    mon.simulated.clear()
+    run(go(6))
+    assert inc.status == "resolved"

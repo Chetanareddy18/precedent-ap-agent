@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Precedent — Ops Watch</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    .ops { max-width: 1000px; margin: 20px auto; padding: 0 16px; }
+    .health { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .st-ok { color: var(--good-ink); } .st-failing { color: var(--crit); } .st-none { color: var(--muted); }
+    .inc { border-left: 4px solid var(--axis); }
+    .inc.SEV1 { border-left-color: var(--crit); } .inc.SEV2 { border-left-color: var(--serious); } .inc.SEV3 { border-left-color: var(--warn); }
+    .inc.resolved { opacity: .6; }
+    .inc h4 { margin: 4px 0 6px; font-size: 15px; }
+    .inc .lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); margin-top: 8px; }
+    .inc ol { margin: 4px 0; padding-left: 20px; }
+    .inc .tl { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div><h1>Ops Watch</h1><p class="tag">Continuous monitoring and incidents for the Precedent agent.</p></div></div>
+  <div class="controls"><span class="pill" id="lastCheck">…</span><a class="btn" href="/">← Workbench</a></div>
+</header>
+
+<main class="ops">
+  <div class="health" id="health"></div>
+
+  <div class="card">
+    <div class="card-head"><h3>Simulate a failure (demo)</h3></div>
+    <div class="row">
+      <label class="switch"><input type="checkbox" data-fault="memory_down"><span class="slider"></span><span class="switch-label">Hindsight memory down</span></label>
+      <label class="switch"><input type="checkbox" data-fault="llm_down"><span class="slider"></span><span class="switch-label">LLM down</span></label>
+    </div>
+    <p class="muted" style="margin:8px 0 0">Turn one on, process a few invoices in the workbench, and watch an incident open here. Turn it off and it closes itself.</p>
+  </div>
+
+  <div class="card-head" style="margin-top:18px"><h3>Incidents</h3><span class="muted" id="openCount"></span></div>
+  <div id="incidents"></div>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+async function api(path, body) {
+  const r = await fetch(path, body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  return r.json();
+}
+
+function render(o) {
+  $("#lastCheck").textContent = `checked ${o.last_check ? o.last_check.slice(11) : "—"} · every ${o.interval_s}s`;
+  $("#health").innerHTML = [
+    ["Hindsight memory", o.memory, o.memory], ["LLM", o.llm, o.llm],
+    ["Avg decision time", o.avg_decision_s == null ? "—" : `${o.avg_decision_s}s / ${o.target_s}s target`, "none"],
+  ].map(([l, v, st]) => `<div class="kpi"><div class="l">${l}</div><div class="v st-${st === "no data" ? "none" : st}">${esc(v)}</div></div>`).join("");
+  document.querySelectorAll("[data-fault]").forEach((el) => (el.checked = o.simulated.includes(el.dataset.fault)));
+  $("#openCount").textContent = `${o.open} open`;
+  $("#incidents").innerHTML = o.incidents.length ? o.incidents.map((i) => `
+    <div class="card inc ${i.severity} ${i.status}">
+      <div class="row"><span class="badge ${i.severity === "SEV1" ? "b-wrong" : i.severity === "SEV2" ? "b-human" : "soft"}">${i.severity}</span>
+        <span class="badge soft">${esc(i.status)}</span><span class="muted">${esc(i.id)} · opened ${esc(i.opened_at.slice(11))}</span></div>
+      <h4>${esc(i.title)}</h4>
+      <div>${esc(i.evidence)}</div>
+      <div class="lbl">If nobody acts</div><div>${esc(i.impact)}</div>
+      <div class="lbl">How to fix it</div><ol>${i.fix.map((a) => `<li>${esc(a)}</li>`).join("")}</ol>
+      ${i.status === "open" ? `<button class="btn small primary" data-res="${i.id}">Resolve</button>` : ""}
+      ${i.resolved_at ? `<div class="tl">resolved ${esc(i.resolved_at.slice(11))}</div>` : ""}
+    </div>`).join("") : `<div class="card muted">All clear. No incidents.</div>`;
+}
+
+document.addEventListener("click", async (e) => {
+  const r = e.target.dataset.res;
+  if (r) render(await api(`/api/incidents/${r}/resolve`, {}));
+});
+document.querySelectorAll("[data-fault]").forEach((el) => el.addEventListener("change", async () =>
+  render(await api("/api/ops/simulate", { fault: el.dataset.fault, on: el.checked }))));
+
+async function poll() { try { render(await api("/api/ops")); } catch {} }
+poll();
+setInterval(poll, 3000);
+</script>
+</body>
+</html>

@@ -22,6 +22,9 @@ class Settings:
     llm_fallback_model: str = os.getenv("LLM_FALLBACK_MODEL", "qwen/qwen3-32b")
     auto_confidence: float = float(os.getenv("AUTO_RESOLVE_CONFIDENCE", "0.75"))
     minutes_per_exception: float = float(os.getenv("MINUTES_PER_EXCEPTION", "18"))
+    ops_interval_s: float = float(os.getenv("OPS_INTERVAL_S", "10"))
+    latency_slo_ms: int = int(os.getenv("LATENCY_SLO_MS", "12000"))
+    incident_webhook_url: str | None = os.getenv("INCIDENT_WEBHOOK_URL") or None
     data_dir: Path = ROOT / "data"
 
 
